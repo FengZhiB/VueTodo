@@ -7,8 +7,7 @@
         :key="item.id"
         :to="item.type"
         class="circle"
-        :class="[item.className,activeType==item.type?'circle-fill':'']"
-        @click="activeType=item.type"
+        :class="item.className"
       >
         {{item.text}}
       </router-link>
@@ -68,7 +67,7 @@ footer {
       // @include border(1px, #0f0, solid);
       @include background-color(#fff);
     }
-    .circle-success.circle-fill {
+    .circle-success.router-link-active {
       @include background-color(#0f0);
       @include color(#fff);
     }
@@ -76,7 +75,7 @@ footer {
       @include background-color(#fff);
       @include color(#00f);
     }
-    .circle-primary.circle-fill {
+    .circle-primary.router-link-active {
       @include background-color(#00f);
       @include color(#fff);
     }
@@ -84,7 +83,7 @@ footer {
       @include background-color(#fff);
       @include color(#f00);
     }
-    .circle-warn.circle-fill {
+    .circle-warn.router-link-active {
       @include background-color(#f00);
       @include color(#fff);
     }

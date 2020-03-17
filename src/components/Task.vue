@@ -6,7 +6,7 @@
         :key="item.id"
       >
         <p>任务：{{item.task}}</p>
-        <p>添加时间：{{item.date}}</p>
+        <p>添加时间：{{item.date|timer}}</p>
         <p class="btnbox"><span
             @click="checkF(index)"
             class="btn"
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
@@ -50,10 +51,14 @@ export default {
     checkF(index) {
       //更改已完成和未完成
       this.tasklist[index].tf = !this.tasklist[index].tf
+      // console.log(this.tasklist)
+      this.changeTasklist(this.tasklist)
     },
     delTask(index) {
+      //删除
       this.tasklist.splice(index, 1)
       console.log(index)
+      this.changeTasklist(this.tasklist)
     },
     changeF(index) {
       this.task = this.tasklist[index].task
@@ -64,9 +69,15 @@ export default {
       this.uF = false
     },
     updata() {
+      //修改数据
       this.tasklist[this.index].task = this.task
       this.closeF()
-    }
+      console.log(this.tasklist)
+      this.changeTasklist(this.tasklist)
+    },
+    ...mapMutations({
+      changeTasklist: 'changeTasklist'
+    })
   }
 }
 </script>

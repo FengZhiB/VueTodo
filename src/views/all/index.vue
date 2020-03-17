@@ -29,28 +29,34 @@
 </template>
 <script>
 import Task from '@/components/Task.vue'
+import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
       addF: false, //模态框开关
       task: '', //任务内容
-      tasklist: []
+      tasklist: this.$store.state.Todo.tasklist
     }
   },
   components: {
     Task
   },
+  mounted() {
+    console.log(this.$store.state.Todo.tasklist)
+  },
   methods: {
     openF() {
       //打开输入框
       this.addF = true
-      console.log(this.addF)
+      // console.log(this.addF)
     },
     closeF() {
+      //关闭模态框
       this.addF = false
-      console.log(this.addF)
+      // console.log(this.addF)
     },
     addTask() {
+      //添加新任务
       const { task } = this
       const date = new Date().getTime()
       this.tasklist.push({
@@ -62,7 +68,11 @@ export default {
       this.task = ''
       this.closeF()
       console.log(this.tasklist)
-    }
+      this.changeTasklist(this.tasklist)
+    },
+    ...mapMutations({
+      changeTasklist: 'changeTasklist'
+    })
   }
 }
 </script>
